@@ -1,0 +1,240 @@
+Diaporama:
+
+General:
+self_contained: TRUE, pour n'avoir qu'un fichier html
+incremental: false
+widescreen: TRUE pour l'avoir en 16:9
+Changement du répertoire de travail pour lancer sous AUS U:/Mes documents
+Routine pour charger les packages et les installer s'ils ne le sont pas
+
+
+D5:
+definition de multi-paradigme
+
+D12:
+- soumettre une commande par **Entrée**
+- Aide sur une fonction: **?nom_de_fonction**
+- Recherche dans l'aide **??mots-clés**
+- Pour effacer le contenu de la console: 
+  + menu Edit -> Clear console
+  + ou **Ctrl + L**
+  
+D24: 
+Fusion avec la D25
+
+D25:  
+Diapo 26 (Les objets R - Leurs types)
+
+D26:
+Diapo 27 (Les objets R - Tester ou Modifier le mode d'un objet R)
+
+D27:
+Diapo 28 (Les vecteurs)
+
+D28:
+Diapo 29 (Les vecteurs)
+
+D29:
+Diapo 30 (Les vecteurs numériques)
+  
+D30:
+Diapo 31+32 (Les vecteurs numériques)  
+- ajout des fonctions any() et all()
+
+D31:
+Les fonctions sur le type numérique
+floor, ceiling, 
+Liste de fonctions mathématiques: 
+"abs", "sign", "sqrt", "trunc", "cummax", "cummin", "cumprod", 
+"cumsum", "log", "log10", "log2", "log1p", "acos", "acosh", "asin", 
+"asinh", "atan", "atanh", "exp", "expm1", "cos", "cosh", "cospi", "sin", 
+"sinh", "sinpi", "tan", "tanh", "tanpi", "gamma", "lgamma", "digamma", "trigamma"
+
+D32:
+Le type character
+paste0(), paste(), substr(), strsplit()
+
+D35:
+ajout de na.rm = TRUE
+
+D41:
+ajout de names(DF)
+  
+D58:
+#supprimer des colonnes
+tab_naissances %>% select(-sexe, regnais, agemere, csp, everything()) %>% head(3)
+
+outre everything(), le package dplyr continet de nombreuses fonctions utiles: starts_with(), ends_with(), contains(), matches(), num_range(), one_of(), group_cols()
+  
+D66:
+Diapo 67 (Recoder des variables: case_when())
+
+D67:
+Créer une variable sans conserver les autres: transmute
+
+tab_naissances %>% transmute(datenais = paste(jnais,mnais,anais,sep="/")) %>% head(5)
+
+D71: la fonction top_n() et comparaison avec head()
+Le top2 par sexe du nombre de naissance dans chaque région:
+
+tab_naissances %>% group_by(sexe, regnais) %>% 
+  summarise( nb_naissances = n()) %>%
+  arrange(sexe,desc(nb_naissances)) %>% top_n(2)
+
+## # A tibble: 4 x 3
+## # Groups:   sexe [2]
+##   sexe  regnais nb_naissances
+##   <chr> <chr>           <int>
+## 1 1     11               9393
+## 2 1     84               4818
+## 3 2     11               8867
+## 4 2     84               4493
+
+Attention, la fonction head(n) donne les enregistrements de la table sans groupement
+
+tab_naissances %>% group_by(sexe, regnais) %>% summarise(nb_naissances = n()) %>% 
+  arrange(sexe,desc(nb_naissances)) %>% head(2)
+# Sexe            regnais            nb_naissances
+# <chr>           <chr>             <int>
+# 1               11                9393        
+# 1               84                4818     
+# 2 rows
+
+D76:
+ajout d'un schéma d'exemple pour illustrer toutes les fonctions de jointure
+
+D87:
+Importer les types de fichiers courants: Le package readODS
+
+    il permet d'importer et d'exporter des fichiers CALC
+    le parsing est peu optimisé, il est plus pratique de passer par le format CSV
+
+library(readODS) # read_ODS et write_ODS
+data <- read_ods("../Data_nonR/Dep02.ods") #import de fichier CALC
+data <- data %>% mutate(densite=Population/Superficie)
+
+write_ods(data, "../Data_nonR/Dep02b.ods")#export de fichier CALC
+
+D88:
+Importer les types de fichiers courants: Le package readxl
+
+    il permet d'importer des fichiers EXCEL
+    le parsing est meilleur que celui du package xlsx
+    pas de fonction d'export
+
+library("readxl") #read_xls
+data <- read_xls("../Data_nonR/cnaf.xls") #import de fichier EXCEL
+
+D89:
+Importer les types de fichiers courants: Le package haven
+
+    il permet d'importer et d'exporter des fichiers SAS
+
+library("haven") #read_sas
+data <- read_sas("../Data_nonR/ra2010lib.sas7bdat") #import de fichier SAS
+data <- data %>% mutate(chom = chom_hom + chom_fem)
+
+write_sas(data,"../Data_nonR/ra2010lib2.sas7bdat")
+
+D90:
+Importer les types de fichiers courants: Le package readr
+
+    il permet d'importer des fichiers CSV (Comma Separated Values)
+    le parsing est meilleur que celui de la fonction RBase
+    privilégier read_csv2 qui est adaptée aux conventions françaises des séparateurs
+
+library("readr") #read_csv2 (préférable à la version de Rbase)
+data <- read_csv2("../Data_nonR/dep01.csv")
+data <- data %>% 
+  mutate(
+    partchfem = round(100 * chom_fem / sum(chom_hom+chom_fem, na.rm = T), 1)
+    )
+
+write_csv(data, "../Data_nonR/dep01b.csv")
+
+# avec du pipe, sans ecrire de variable
+read_csv2("./Data_nonR/dep01.csv") %>% 
+  mutate(
+    partchfem = round(100 * chom_fem / sum(chom_hom+chom_fem, na.rm = T), 1)
+  ) %>% 
+  write_csv("./Data_nonR/dep01b.csv")
+
+D91:
+diapo 87 (Un package à utiliser: fst)
+
+D92:
+diapo 88 (Un package à utiliser: fst)
+
+etc... jusqu'à
+
+D117:
+Sauvegarde d'un graphique
+Via l’interface de RStudio
+
+L’export de graphiques est très facile avec RStudio. Lorsque l’on créé un graphique, ce dernier est affiché sous l’onglet Plots dans le quadrant inférieur droit. Il suffit de cliquer sur Export pour avoir accès à trois options différentes :
+
+    Save as image pour sauvegarder le graphique en tant que fichier image ;
+    Save as PDF pour sauvegarder le graphique dans un fichier PDF ;
+    Copy to Clipboard pour copier le graphique dans le presse-papier (et pouvoir ainsi le coller ensuite dans un document Word par exemple).
+
+via un script
+
+boxplot(rnorm(100))
+dev.print(device = png, file = "export.png", width = 600)
+
+  
+  
+  
+Exercices: 
+Ajout des renvois vers les slides
+
+
+
+
+Raccourcis:
+
+
+
+Docus:
+anglais/
+							  base-r.pdf
+							   caret.pdf
+						 cartography.pdf
+						 data-import.pdf
+				 data-transformation.pdf
+			  data-visualization-2.1.pdf
+						   datatable.pdf
+							estimatr.pdf
+							eurostat.pdf
+								 h2o.pdf
+			   how-big-is-your-graph.pdf
+							   keras.pdf
+							 leaflet.pdf
+						   lubridate.pdf
+	 Machine Learning Modelling in R.pdf
+								 mlr.pdf
+							  mosaic.pdf
+							   nardl.pdf
+				 package-development.pdf
+							   purrr.pdf
+							quanteda.pdf
+						   randomizr.pdf
+							   regex.pdf
+					   rmarkdown-2.0.pdf
+						 rstudio-ide.pdf
+								  sf.pdf
+							   shiny.pdf
+							  sjmisc.pdf
+							sparklyr.pdf
+							 strings.pdf
+						   survminer.pdf
+							  syntax.pdf
+							tidyeval.pdf
+							  xplain.pdf
+
+francais/
+    		   dplyr-french-cheatsheet.pdf
+			 ggplot2-french-cheatsheet.pdf
+						R-refcard-stat.pdf
+			 rstudio-french-cheatsheet.pdf
+			   shiny-french-cheatsheet.pdf
