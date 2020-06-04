@@ -1,5 +1,5 @@
 # Formation-R_01-Initiation
-Formation R: 01 Initiation - Prise en main de R
+**Formation R: 01 Initiation - Prise en main de R**
 
 ## Le diaporama de la formation
 
@@ -11,3 +11,15 @@ Formation R: 01 Initiation - Prise en main de R
 
 ## Les données
 [ra2010lib.sas7bdat](https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat)
+
+<details><summary>CLICK ME</summary>
+<p>
+
+#### yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
