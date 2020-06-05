@@ -12,14 +12,6 @@
 ## Les données
 [ra2010lib.sas7bdat](https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat)
 
-<details><summary>CLICK ME</summary>
-<p>
-
-#### yes, even hidden code blocks!
-
-```python
-print("hello world !")
-```
-
-</p>
+<details><summary>Chapitre 1:</summary>
+[ra2010lib.sas7bdat](https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat)
 </details>
