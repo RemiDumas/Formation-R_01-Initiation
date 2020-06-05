@@ -1,5 +1,5 @@
-# Formation-R_01-Initiation
-**Formation R: 01 Initiation - Prise en main de R**
+# Formation R: 01-Initiation
+**Initiation - Prise en main rapide de données sous R**
 
 ## Le diaporama de la formation
 
@@ -21,4 +21,5 @@ ra2010lib.sas7bdat
 <li>
 l
 </li>
+</ul>
 </details>
