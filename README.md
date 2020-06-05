@@ -13,5 +13,12 @@
 [ra2010lib.sas7bdat](https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat)
 
 <details><summary>Chapitre 1:</summary>
-[ra2010lib.sas7bdat](https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat)
+<ul>
+<li><a href="https://remidumas.github.io/Formation-R_01-Initiation/Data_nonR/ra2010lib.sas7bdat">
+ra2010lib.sas7bdat
+</a>
+</li>
+<li>
+l
+</li>
 </details>
